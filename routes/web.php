@@ -35,9 +35,16 @@ Route::get('/admin-logout', function () {
     Session::forget('admin');
     return redirect('/admin-login');
 });
+
 Route::get('/product-add', function () {
     return view('admin.product-add');
 });
 Route::post('/product-add', [AdminController::class, 'product-add']);
 
+Route::get('/product-detail/{id}', [ProductController::class, 'product_detail']);
+Route::post('/add-to-cart', [ProductController::class, 'addToCart']);
+
+Route::get('/search', [ProductController::class, 'Search']);
+Route::get('/cartlist', [ProductController::class, 'cartList']);
+Route::get('/removecart/{id}', [ProductController::class, 'removeCart']);
 

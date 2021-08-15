@@ -16,10 +16,10 @@ class ProductSeeder extends Seeder
     {
         //
         DB::table('products')->insert([
-            'name' => 'VIVO Mobile',
+            'name' => 'Samsung Mobile',
             'price' => '10000',
             'category' =>'mobile',
-            'description' =>'8gb RAM, 20MP Front Camera',
+            'description' =>'4gb RAM, 12MP Front AI Camera',
             'gallery' =>'public/mob2.jpg',
             'created_at' => NOW(),
             'updated_at' => NOW(),

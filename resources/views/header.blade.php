@@ -1,21 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="#">Home</a>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Orders</a>
-        <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+<?php 
+  use App\Http\Controllers\ProductController;
+  $total = ProductController::cartItem();
+?>
+<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-dark bg-primary">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link text-white" href="#">Orders</a>
+          <form action="/search" class="form-inline my-2 my-lg-0">
+          <input id="navBarSearchForm" class="form-control mr-sm-2" name="query">
+          <button class="btn btn-outline-success my-2 my-sm-0 text-white" type="submit">Search</button>
+          </form>
+      </div>
     </div>
-  </div>
-  <a class="nav-item nav-link align-right" href="#">Cart</a>
+    @if(Session::has('user'))
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Welcome | {{Session::get('user')['name']}}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="/logout">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+    <a class="nav-item nav-link align-right text-white" href="/cartlist">Cart ({{$total}})</a>
+    @else
+    <a class="nav-item nav-link align-right text-white" href="/login">Sign in</a>
+    @endif
 </nav>
-
-<!-- <nav class="nav navbar-dark bg-primary">
-  <a class="nav-link active" href="#">Active</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link disabled" href="#">Disabled</a>
-</nav> -->
